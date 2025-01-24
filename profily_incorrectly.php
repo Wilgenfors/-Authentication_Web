@@ -1,12 +1,11 @@
 <?php
 session_start(); // Запускаем сессию для хранения данных о пользователе
 
-// Проверяем, есть ли сообщение об успешном входе
-if (isset($_SESSION['success_message'])) {
-    // Если сообщение существует, можно было бы его вывести
-    //echo htmlspecialchars($_SESSION['success_message']); // Выводим сообщение, экранируя специальные символы для безопасности
-    unset($_SESSION['success_message']); // Очищаем сообщение после его вывода
-}
+// Получаем сообщение об успешном входе из сессии
+$successMessage = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : '';
+
+// Очищаем сообщение сразу после его получения
+unset($_SESSION['success_message']);
 ?>
 
 <html lang="ru"> <!-- Устанавливаем язык страницы -->
@@ -24,7 +23,14 @@ if (isset($_SESSION['success_message'])) {
     <main>
         <form class="form"> <!-- Форма для отображения информации о неудачной попытке входа -->
             <h2>Неудачная попытка входа, попробуйте ещё раз.</h2><br /> <!-- Сообщение для пользователя -->
-            <a href="authorization.php">Return to authorization</a> <!-- Ссылка для возврата на страницу авторизации -->
+            
+            <?php if (!empty($successMessage)): ?> <!-- Проверяем, есть ли сообщение об успешном входе -->
+                <div class="success-message" style="color: red;"> 
+                    <?php echo htmlspecialchars($successMessage); ?> <!-- Выводим сообщение с экранированием специальных символов -->
+                </div>
+            <?php endif; ?>
+
+            <a href="authorization.php">Вернуться к авторизации</a> <!-- Ссылка для возврата на страницу авторизации -->
         </form>
     </main>
 </body>
