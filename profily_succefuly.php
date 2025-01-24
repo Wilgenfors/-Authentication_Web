@@ -1,19 +1,18 @@
 <?php
 session_start(); // Запускаем сессию для хранения данных о пользователе
 
-// Проверяем, есть ли сообщение успешной регистрации в сессии
-if (isset($_SESSION['success_message'])) {
-    // Если сообщение существует, выводим его на экран и очищаем из сессии
-    // echo htmlspecialchars($_SESSION['success_message']); // Выводим сообщение, экранируя специальные символы для безопасности
-    // unset($_SESSION['success_message']); // Удаляем сообщение из сессии после его вывода, чтобы оно не отображалось повторно
-}
+// Получаем сообщение об успешной регистрации из сессии
+$successMessage = isset($_SESSION['success_message']) ? $_SESSION['success_message'] : '';
+
+// Очищаем сообщение после его использования
+unset($_SESSION['success_message']);
 ?>
 
 <html lang="ru"> <!-- Устанавливаем язык страницы -->
 <head>
     <meta charset="utf-8"> <!-- Задаем кодировку страницы -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Настройка для адаптивного дизайна -->
-    <title>Succefuly sing up</title> <!-- Заголовок страницы, отображаемый на вкладке браузера -->
+    <title>Успешная регистрация</title> <!-- Заголовок страницы, отображаемый на вкладке браузера -->
     <meta property="og:title" content="Заголовок страницы в OG"> <!-- Заголовок страницы для Open Graph -->
     <meta property="og:description" content="Описание страницы в OG"> <!-- Описание для Open Graph -->
     <meta property="og:image" content="https://example.com/image.jpg"> <!-- Изображение для Open Graph -->
@@ -23,7 +22,7 @@ if (isset($_SESSION['success_message'])) {
 <body>
     <main> <!-- Основной контент страницы -->
         <form class="form"> <!-- Форма, хотя в данном случае она не отправляет данные -->
-            <h2>Вы вошли в свой профиль </h2><br /> <!-- Сообщение о том, что пользователь уже вошел в склад -->
+            <h2>Вы вошли в свой профиль</h2><br /> <!-- Сообщение о том, что пользователь уже вошел в склад -->
         </form> <!-- Закрытие формы -->
     </main>
 </body>
